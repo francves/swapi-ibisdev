@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Pilot } from 'src/app/core/models/pilot.model';
 import { Starship } from 'src/app/core/models/starship.model';
@@ -11,7 +11,7 @@ import { NavigationService } from 'src/app/shared/services/navigation.service';
   templateUrl: './starships-detail.component.html',
   styleUrls: ['./starships-detail.component.scss']
 })
-export class StarshipsDetailComponent implements OnInit {
+export class StarshipsDetailComponent implements OnInit, OnDestroy {
 
   starship: Starship | undefined;
   subPilots: Subscription;
@@ -19,7 +19,8 @@ export class StarshipsDetailComponent implements OnInit {
 
   constructor(
     private apiservice: ApiService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router
   ) {
     this.subPilots = new Subscription;
     this.pilotList = [];
@@ -45,6 +46,16 @@ export class StarshipsDetailComponent implements OnInit {
 
   initPilotsLits(value: Pilot[]) {
     this.pilotList = value;
+  }
+
+  navigatePilotDetail(pilot: Pilot) {
+    this.apiservice.setCurrentPilot(pilot);
+    this.router.navigate(['/pilots/detail']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subPilots)
+      this.subPilots.unsubscribe();
   }
 
 }

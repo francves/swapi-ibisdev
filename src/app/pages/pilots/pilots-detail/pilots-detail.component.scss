@@ -1,0 +1,21 @@
+@media (min-width: 960px) {
+    .pilot-container {
+        margin: 4% 32%;
+    }
+}
+
+.pilot-container {
+    mat-card-header {
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
+}
+
+.pilot-card-content {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        width: 50%;
+    }
+}

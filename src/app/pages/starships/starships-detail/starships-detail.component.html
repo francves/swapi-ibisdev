@@ -33,7 +33,7 @@
                 <mat-list role="list">
                     <ng-container *ngFor="let pilot of pilotList">
                         <mat-list-item>{{pilot.name}}
-                            <button mat-icon-button matTooltip="Show detail" matTooltipPosition="right">
+                            <button mat-icon-button matTooltip="Show detail" matTooltipPosition="right" (click)="navigatePilotDetail(pilot)">
                                 <mat-icon>visibility</mat-icon>
                             </button>
                         </mat-list-item>

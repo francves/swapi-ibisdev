@@ -1,0 +1,29 @@
+<div class="pilot-container">
+    <mat-card>
+        <mat-card-header>
+            <btn-back></btn-back>
+            <mat-card-title>{{pilot?.name}}</mat-card-title>
+            <mat-card-subtitle>{{pilot?.gender}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="./assets/images/starwars-pilot.webp">
+        <mat-card-content>
+            <div class="pilot-card-content">
+                <div>
+                    <ul>
+                        <li><strong>Birth year:</strong> {{pilot?.birth_year}}</li>
+                        <li><strong>Eye color:</strong> {{pilot?.eye_color}}</li>
+                        <li><strong>Hair color:</strong> {{pilot?.hair_color}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Height:</strong> {{pilot?.height}}</li>
+                        <li><strong>Mass:</strong> {{pilot?.mass}}</li>
+                        <li><strong>Skin color:</strong> {{pilot?.skin_color}}</li>
+                    </ul>
+                </div>
+            </div>
+        </mat-card-content>
+        <!-- <mat-card-actions></mat-card-actions> -->
+    </mat-card>
+</div>
