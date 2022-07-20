@@ -13,6 +13,7 @@ export class ApiService {
   starships_current: Starship[];
   private starships = new Subject<any[]>();
   starships_current$ = this.starships.asObservable();
+  starship_current: Starship | undefined;
 
   constructor(
     private http: HttpClient
@@ -34,6 +35,14 @@ export class ApiService {
 
   getCurrentStarships() {
     return this.starships_current;
+  }
+
+  setCurrentStarship(value: Starship) {
+    this.starship_current = value;
+  }
+
+  getCurrentStarship(){
+    return this.starship_current;
   }
 
 }

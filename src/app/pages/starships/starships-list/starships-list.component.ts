@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Starship } from 'src/app/core/models/starship.model';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -17,7 +18,8 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Starship>;
 
   constructor(
-    private apiservice: ApiService
+    private apiservice: ApiService,
+    private router: Router
   ) {
     this.subStarships = new Subscription;
     this.dataSource = new MatTableDataSource();
@@ -51,6 +53,11 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  navigateStarshipDetail(starship: Starship){
+    this.apiservice.setCurrentStarship(starship);
+    this.router.navigate(['/starships/detail']);
   }
 
   ngOnDestroy(): void {

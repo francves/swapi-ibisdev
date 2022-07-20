@@ -1,0 +1,22 @@
+@media (min-width: 960px) {
+    .starships-container {
+        margin: 4% 32%;
+    }
+}
+
+.starships-container {
+    mat-card-header {
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
+}
+
+
+.starship-card-content {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        width: 50%;
+    }
+}
