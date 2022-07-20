@@ -6,29 +6,52 @@
             <mat-card-subtitle>{{starship?.model}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="./assets/images/star-wars-ships.jpg">
-        <mat-card-content class="starship-card-content">
-            <div>
-                <ul>
-                    <li><strong>manufacturer:</strong> {{starship?.manufacturer}}</li>
-                    <li><strong>Starship class:</strong> {{starship?.starship_class}}</li>
-                    <li><strong>Consumables:</strong> {{starship?.consumables}}</li>
-                    <li><strong>Max atmosphering speed:</strong> {{starship?.max_atmosphering_speed}}</li>
-                    <li><strong>MGLT:</strong> {{starship?.MGLT}}</li>
-                </ul>
+        <mat-card-content>
+            <div class="starship-card-content">
+                <div>
+                    <ul>
+                        <li><strong>manufacturer:</strong> {{starship?.manufacturer}}</li>
+                        <li><strong>Starship class:</strong> {{starship?.starship_class}}</li>
+                        <li><strong>Consumables:</strong> {{starship?.consumables}}</li>
+                        <li><strong>Max atmosphering speed:</strong> {{starship?.max_atmosphering_speed}}</li>
+                        <li><strong>MGLT:</strong> {{starship?.MGLT}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Cargo capacity:</strong> {{starship?.cargo_capacity}}</li>
+                        <li><strong>Cost in credits:</strong> {{starship?.cost_in_credits}}</li>
+                        <li><strong>Crew:</strong> {{starship?.crew}}</li>
+                        <li><strong>Hyperdrive rating:</strong> {{starship?.hyperdrive_rating}}</li>
+                        <li><strong>Length:</strong> {{starship?.length}}</li>
+                        <li><strong>Passengers:</strong> {{starship?.passengers}}</li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <ul>
-                    <li><strong>Cargo capacity:</strong> {{starship?.cargo_capacity}}</li>
-                    <li><strong>Cost in credits:</strong> {{starship?.cost_in_credits}}</li>
-                    <li><strong>Crew:</strong> {{starship?.crew}}</li>
-                    <li><strong>Hyperdrive rating:</strong> {{starship?.hyperdrive_rating}}</li>
-                    <li><strong>Length:</strong> {{starship?.length}}</li>
-                    <li><strong>Passengers:</strong> {{starship?.passengers}}</li>
-                </ul>
+            <div *ngIf="pilotList.length > 0" class="pilots-container">
+                <h3><strong>Pilots:</strong></h3>
+                <mat-list role="list">
+                    <ng-container *ngFor="let pilot of pilotList">
+                        <mat-list-item>{{pilot.name}}
+                            <button mat-icon-button matTooltip="Show detail" matTooltipPosition="right">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </ng-container>
+                </mat-list>
             </div>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-button>SHOW PILOTS</button>
+        <mat-card-actions *ngIf="pilotList.length === 0">
+            <ng-container *ngIf="showPilots(); else noPilots">
+                <button mat-button color="primary" (click)="fetchPilots()">SHOW PILOTS</button>
+            </ng-container>
+            <ng-template #noPilots>
+                <div class="no-pilots-message">
+                    <mat-icon>info_outline</mat-icon>
+                    <mat-label>No pilots assigned!</mat-label>
+                </div>
+            </ng-template>
         </mat-card-actions>
     </mat-card>
 </div>
