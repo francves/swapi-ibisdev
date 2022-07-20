@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    img {
+        max-width: 160px;
+        margin-right: 8px;
+    }
+
+    h1 {
+        color: #f7e21e
+    }
+}
+
+.starships-container {
+    mat-card {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 960px) {
+    .starships-container {
+        margin: 4% 12%;
+    }
+}
