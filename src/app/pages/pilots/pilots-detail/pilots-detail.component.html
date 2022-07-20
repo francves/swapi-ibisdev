@@ -5,7 +5,7 @@
             <mat-card-title>{{pilot?.name}}</mat-card-title>
             <mat-card-subtitle>{{pilot?.gender}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="./assets/images/starwars-pilot.webp">
+        <img mat-card-image [src]="randomPhotoUrl || './assets/images/starwars-pilot.webp'">
         <mat-card-content>
             <div class="pilot-card-content">
                 <div>
