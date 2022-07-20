@@ -16,6 +16,7 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['name', 'model', 'starship_class', 'MGLT', 'option'];
   dataSource: MatTableDataSource<Starship>;
+  waitingService: boolean;
 
   constructor(
     private apiservice: ApiService,
@@ -23,6 +24,7 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   ) {
     this.subStarships = new Subscription;
     this.dataSource = new MatTableDataSource();
+    this.waitingService = false;
   }
 
   ngOnInit(): void {
@@ -44,8 +46,10 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   }
 
   fetchData() {
+    this.waitingService = true;
     this.subStarships = this.apiservice.starships_current$.subscribe((value: Starship[]) => {
       this.initGrid(value);
+      this.waitingService = false;
     })
     this.apiservice.getStarships();
   }

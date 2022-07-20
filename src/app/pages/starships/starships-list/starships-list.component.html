@@ -4,48 +4,54 @@
         <h1>Starships</h1>
     </div>
     <mat-card>
-        <mat-form-field appearance="standard">
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. X-wing" #input>
-        </mat-form-field>
+        <div class="loading-shade" *ngIf="waitingService">
+            <mat-spinner strokeWidth="6" diameter="60" matTooltip="Loading Starships List" matTooltipPosition="right"></mat-spinner>
+        </div>
+        <ng-container *ngIf="!waitingService">
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. X-wing" #input>
+            </mat-form-field>
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name. </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="model">
-                <th mat-header-cell *matHeaderCellDef> Model </th>
-                <td mat-cell *matCellDef="let element"> {{element.model}} </td>
-            </ng-container>
+                <ng-container matColumnDef="model">
+                    <th mat-header-cell *matHeaderCellDef> Model </th>
+                    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="starship_class">
-                <th mat-header-cell *matHeaderCellDef> Starship Class </th>
-                <td mat-cell *matCellDef="let element"> {{element.starship_class}} </td>
-            </ng-container>
+                <ng-container matColumnDef="starship_class">
+                    <th mat-header-cell *matHeaderCellDef> Starship Class </th>
+                    <td mat-cell *matCellDef="let element"> {{element.starship_class}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="MGLT">
-                <th mat-header-cell *matHeaderCellDef> MGLT </th>
-                <td mat-cell *matCellDef="let element"> {{element.MGLT}} </td>
-            </ng-container>
+                <ng-container matColumnDef="MGLT">
+                    <th mat-header-cell *matHeaderCellDef> MGLT </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MGLT}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="option">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button (click)="navigateStarshipDetail(element)" matTooltip="Show detail" matTooltipPosition="right">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="option">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button (click)="navigateStarshipDetail(element)" matTooltip="Show detail"
+                            matTooltipPosition="right">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-            <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-            </tr>
-        </table>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+        </ng-container>
     </mat-card>
 </div>
